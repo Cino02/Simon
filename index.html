@@ -1,39 +1,46 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Love for Simon</title>
   <style>
-    body {
+    * {
       margin: 0;
       padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Arial', sans-serif;
       background: linear-gradient(to bottom right, #ff9a9e, #fad0c4);
       height: 100vh;
-      overflow: hidden;
-      font-family: 'Arial', sans-serif;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      position: relative;
       color: #fff;
+      text-align: center;
+      overflow: hidden;
+      padding: 20px;
     }
 
     h1 {
-      font-size: 3em;
-      text-shadow: 2px 2px #00000022;
+      font-size: 2.5rem;
+      margin-bottom: 20px;
+      text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
     }
 
     button {
-      padding: 15px 30px;
+      padding: 12px 25px;
+      font-size: 1.2rem;
       background-color: #ff5e78;
       border: none;
-      border-radius: 30px;
-      font-size: 1.2em;
+      border-radius: 25px;
       color: white;
       cursor: pointer;
-      transition: background 0.3s;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+      transition: background-color 0.3s ease;
     }
 
     button:hover {
@@ -42,18 +49,19 @@
 
     #message {
       margin-top: 20px;
-      font-size: 1.5em;
-      max-width: 80%;
-      text-align: center;
+      font-size: 1.3rem;
+      max-width: 90%;
       display: none;
+      animation: fadeIn 1s ease forwards;
     }
 
     .heart {
       position: absolute;
-      width: 20px;
-      height: 20px;
-      background-color: red;
+      width: 15px;
+      height: 15px;
+      background: red;
       transform: rotate(45deg);
+      top: -20px;
       animation: fall linear infinite;
     }
 
@@ -61,59 +69,66 @@
     .heart::after {
       content: '';
       position: absolute;
-      width: 20px;
-      height: 20px;
-      background-color: red;
+      width: 15px;
+      height: 15px;
+      background: red;
       border-radius: 50%;
     }
 
     .heart::before {
-      top: -10px;
+      top: -7.5px;
       left: 0;
     }
 
     .heart::after {
-      left: -10px;
+      left: -7.5px;
       top: 0;
     }
 
     @keyframes fall {
       0% {
-        transform: translateY(-100px) rotate(45deg);
+        transform: translateY(-50px) rotate(45deg);
         opacity: 1;
       }
       100% {
-        transform: translateY(110vh) rotate(45deg);
+        transform: translateY(100vh) rotate(45deg);
         opacity: 0;
+      }
+    }
+
+    @keyframes fadeIn {
+      0% {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
       }
     }
   </style>
 </head>
 <body>
-
   <h1>For You, Simon 💖</h1>
-  <button onclick="showLove()">Click me</button>
-  <div id="message">You are the light of my life, Simon. I love you more than words can say. 💘</div>
+  <button onclick="showLove()">Tap me</button>
+  <div id="message">You are my everything, Simon. I love you endlessly 💘</div>
 
   <script>
     function showLove() {
-      document.getElementById("message").style.display = "block";
+      const msg = document.getElementById("message");
+      msg.style.display = "block";
     }
 
-    // Create falling hearts
     function createHeart() {
       const heart = document.createElement('div');
       heart.classList.add('heart');
       heart.style.left = Math.random() * 100 + 'vw';
-      heart.style.animationDuration = (Math.random() * 2 + 3) + 's';
+      heart.style.animationDuration = (Math.random() * 3 + 2) + 's';
       document.body.appendChild(heart);
-      setTimeout(() => {
-        heart.remove();
-      }, 5000);
+      setTimeout(() => heart.remove(), 5000);
     }
 
-    setInterval(createHeart, 200);
+    setInterval(createHeart, 300);
   </script>
-
 </body>
 </html>
